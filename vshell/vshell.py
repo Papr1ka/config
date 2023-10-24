@@ -118,7 +118,7 @@ class VShell():
         self.filesystem = ArchiveFileSystemFactory.getSystem(filename)
         self.user = getlogin()
         self.nodename = uname().nodename
-        print(self.filesystem.tree())
+        self.filesystem.tree()
         self.changePath("/")
         self.q = queue.SimpleQueue()
         self.commands = self.getCommands()
