@@ -1,6 +1,8 @@
 from vshell import VShell
 import sys
 
+# Для корректной работы программы необходимо передать путь к архиву с расширением .zip или .tar
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         shell = VShell(

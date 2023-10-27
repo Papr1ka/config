@@ -11,5 +11,5 @@ class ArchiveFileSystemFactory():
         elif filename.endswith(".tar"):
             system = TarFS(filename)
         else:
-            raise ValueError("Ошибка, нераспознаваемый формат архива")
+            raise ValueError("Ошибка, формат архива может быть либо zip, либо tar")
         return system
