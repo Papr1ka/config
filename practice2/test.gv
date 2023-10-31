@@ -1,0 +1,363 @@
+digraph Dependencies {
+	node [color=lightblue style=filled]
+	ranksep=3
+	pdf [color=grey style=filled]
+	pdftotree
+	pdf -> pdftotree
+	pdfminer
+	pdf -> pdfminer
+	bs4
+	pdf -> bs4
+	silverware
+	pdf -> silverware
+	nltk
+	pdf -> nltk
+	disk
+	pdf -> disk
+	pandas
+	pdf -> pandas
+	chronometry
+	pdf -> chronometry
+	IPython
+	pdftotree -> IPython
+	beautifulsoup4
+	pdftotree -> beautifulsoup4
+	keras
+	pdftotree -> keras
+	numpy
+	pdftotree -> numpy
+	pandas
+	pdftotree -> pandas
+	"pdfminer.six"
+	pdftotree -> "pdfminer.six"
+	pillow
+	pdftotree -> pillow
+	selectivesearch
+	pdftotree -> selectivesearch
+	sklearn
+	pdftotree -> sklearn
+	"tabula-py"
+	pdftotree -> "tabula-py"
+	tensorflow
+	pdftotree -> tensorflow
+	wand
+	pdftotree -> wand
+	pandas
+	chronometry -> pandas
+	numpy
+	chronometry -> numpy
+	slytherin
+	chronometry -> slytherin
+	colouration
+	chronometry -> colouration
+	sklearn
+	chronometry -> sklearn
+	ravenclaw
+	chronometry -> ravenclaw
+	"func-timeout"
+	chronometry -> "func-timeout"
+	matplotlib
+	chronometry -> matplotlib
+	dill
+	disk -> dill
+	send2trash
+	disk -> send2trash
+	chronometry
+	disk -> chronometry
+	slytherin
+	disk -> slytherin
+	bs4
+	silverware -> bs4
+	joblib
+	silverware -> joblib
+	pandas
+	silverware -> pandas
+	disk
+	silverware -> disk
+	lxml
+	silverware -> lxml
+	slytherin
+	silverware -> slytherin
+	txt
+	silverware -> txt
+	click
+	nltk -> click
+	joblib
+	nltk -> joblib
+	regex
+	nltk -> regex
+	tqdm
+	nltk -> tqdm
+	numpy
+	pandas -> numpy
+	numpy
+	pandas -> numpy
+	numpy
+	pandas -> numpy
+	"python-dateutil"
+	pandas -> "python-dateutil"
+	pytz
+	pandas -> pytz
+	tzdata
+	pandas -> tzdata
+	soupsieve
+	beautifulsoup4 -> soupsieve
+	"charset-normalizer"
+	"pdfminer.six" -> "charset-normalizer"
+	cryptography
+	"pdfminer.six" -> cryptography
+	"typing-extensions"
+	"pdfminer.six" -> "typing-extensions"
+	decorator
+	IPython -> decorator
+	jedi
+	IPython -> jedi
+	"matplotlib-inline"
+	IPython -> "matplotlib-inline"
+	"prompt-toolkit"
+	IPython -> "prompt-toolkit"
+	pygments
+	IPython -> pygments
+	"stack-data"
+	IPython -> "stack-data"
+	traitlets
+	IPython -> traitlets
+	"typing-extensions"
+	IPython -> "typing-extensions"
+	exceptiongroup
+	IPython -> exceptiongroup
+	pexpect
+	IPython -> pexpect
+	appnope
+	IPython -> appnope
+	colorama
+	IPython -> colorama
+	base32hex
+	slytherin -> base32hex
+	geopy
+	slytherin -> geopy
+	numpy
+	ravenclaw -> numpy
+	pandas
+	ravenclaw -> pandas
+	chronometry
+	ravenclaw -> chronometry
+	SPARQLWrapper
+	ravenclaw -> SPARQLWrapper
+	fuzzywuzzy
+	ravenclaw -> fuzzywuzzy
+	joblib
+	ravenclaw -> joblib
+	slytherin
+	ravenclaw -> slytherin
+	txt
+	ravenclaw -> txt
+	pandas
+	"tabula-py" -> pandas
+	numpy
+	"tabula-py" -> numpy
+	distro
+	"tabula-py" -> distro
+	jpype1
+	"tabula-py" -> jpype1
+	contourpy
+	matplotlib -> contourpy
+	cycler
+	matplotlib -> cycler
+	fonttools
+	matplotlib -> fonttools
+	kiwisolver
+	matplotlib -> kiwisolver
+	numpy
+	matplotlib -> numpy
+	packaging
+	matplotlib -> packaging
+	pillow
+	matplotlib -> pillow
+	pyparsing
+	matplotlib -> pyparsing
+	"python-dateutil"
+	matplotlib -> "python-dateutil"
+	setuptools_scm
+	matplotlib -> setuptools_scm
+	"importlib-resources"
+	matplotlib -> "importlib-resources"
+	colorama
+	click -> colorama
+	"importlib-metadata"
+	click -> "importlib-metadata"
+	"opt-einsum"
+	tensorflow -> "opt-einsum"
+	"absl-py"
+	tensorflow -> "absl-py"
+	astunparse
+	tensorflow -> astunparse
+	flatbuffers
+	tensorflow -> flatbuffers
+	gast
+	tensorflow -> gast
+	"google-pasta"
+	tensorflow -> "google-pasta"
+	h5py
+	tensorflow -> h5py
+	libclang
+	tensorflow -> libclang
+	"ml-dtypes"
+	tensorflow -> "ml-dtypes"
+	numpy
+	tensorflow -> numpy
+	packaging
+	tensorflow -> packaging
+	protobuf
+	tensorflow -> protobuf
+	setuptools
+	tensorflow -> setuptools
+	six
+	tensorflow -> six
+	termcolor
+	tensorflow -> termcolor
+	"typing-extensions"
+	tensorflow -> "typing-extensions"
+	wrapt
+	tensorflow -> wrapt
+	"tensorflow-io-gcs-filesystem"
+	tensorflow -> "tensorflow-io-gcs-filesystem"
+	grpcio
+	tensorflow -> grpcio
+	tensorboard
+	tensorflow -> tensorboard
+	"tensorflow-estimator"
+	tensorflow -> "tensorflow-estimator"
+	keras
+	tensorflow -> keras
+	six
+	"python-dateutil" -> six
+	colorama
+	tqdm -> colorama
+	geographiclib
+	geopy -> geographiclib
+	traitlets
+	"matplotlib-inline" -> traitlets
+	ptyprocess
+	pexpect -> ptyprocess
+	parso
+	jedi -> parso
+	rdflib
+	SPARQLWrapper -> rdflib
+	wcwidth
+	"prompt-toolkit" -> wcwidth
+	executing
+	"stack-data" -> executing
+	asttokens
+	"stack-data" -> asttokens
+	"pure-eval"
+	"stack-data" -> "pure-eval"
+	cffi
+	cryptography -> cffi
+	zipp
+	"importlib-metadata" -> zipp
+	"typing-extensions"
+	"importlib-metadata" -> "typing-extensions"
+	six
+	"google-pasta" -> six
+	wheel
+	astunparse -> wheel
+	six
+	astunparse -> six
+	numpy
+	"opt-einsum" -> numpy
+	packaging
+	setuptools_scm -> packaging
+	setuptools
+	setuptools_scm -> setuptools
+	"typing-extensions"
+	setuptools_scm -> "typing-extensions"
+	tomli
+	setuptools_scm -> tomli
+	zipp
+	"importlib-resources" -> zipp
+	"typing-extensions"
+	kiwisolver -> "typing-extensions"
+	numpy
+	"ml-dtypes" -> numpy
+	numpy
+	"ml-dtypes" -> numpy
+	numpy
+	"ml-dtypes" -> numpy
+	numpy
+	"ml-dtypes" -> numpy
+	"absl-py"
+	tensorboard -> "absl-py"
+	grpcio
+	tensorboard -> grpcio
+	"google-auth"
+	tensorboard -> "google-auth"
+	"google-auth-oauthlib"
+	tensorboard -> "google-auth-oauthlib"
+	markdown
+	tensorboard -> markdown
+	numpy
+	tensorboard -> numpy
+	protobuf
+	tensorboard -> protobuf
+	requests
+	tensorboard -> requests
+	setuptools
+	tensorboard -> setuptools
+	six
+	tensorboard -> six
+	"tensorboard-data-server"
+	tensorboard -> "tensorboard-data-server"
+	werkzeug
+	tensorboard -> werkzeug
+	numpy
+	contourpy -> numpy
+	numpy
+	contourpy -> numpy
+	numpy
+	h5py -> numpy
+	isodate
+	rdflib -> isodate
+	pyparsing
+	rdflib -> pyparsing
+	six
+	asttokens -> six
+	typing
+	asttokens -> typing
+	"backports.functools-lru-cache"
+	wcwidth -> "backports.functools-lru-cache"
+	"importlib-metadata"
+	markdown -> "importlib-metadata"
+	MarkupSafe
+	werkzeug -> MarkupSafe
+	cachetools
+	"google-auth" -> cachetools
+	"pyasn1-modules"
+	"google-auth" -> "pyasn1-modules"
+	rsa
+	"google-auth" -> rsa
+	"charset-normalizer"
+	requests -> "charset-normalizer"
+	idna
+	requests -> idna
+	urllib3
+	requests -> urllib3
+	certifi
+	requests -> certifi
+	pycparser
+	cffi -> pycparser
+	pyasn1
+	"pyasn1-modules" -> pyasn1
+	"google-auth"
+	"google-auth-oauthlib" -> "google-auth"
+	"requests-oauthlib"
+	"google-auth-oauthlib" -> "requests-oauthlib"
+	pyasn1
+	rsa -> pyasn1
+	oauthlib
+	"requests-oauthlib" -> oauthlib
+	requests
+	"requests-oauthlib" -> requests
+	six
+	isodate -> six
+}
