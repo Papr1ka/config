@@ -1,0 +1,138 @@
+<program> ::= <s_exp_list>
+
+<s_exp_list> ::= <s_exp> <s_exp_list> | <s_exp>
+
+<s_exp> ::= <data> |  '(' <s_exp_list> ')'
+
+<data> ::=  <calc_exp> |
+            list '(' <data> ')' |
+            <object>
+
+<object> ::= '(' <key_value_s_exp_list> ')'
+
+<key_value_s_exp_list> ::=  <key_value_s_exp> |
+                            <key_value_s_exp> <key_value_s_exp_list>
+
+<key_value_s_exp> ::= '(' (identifier|string) (dtype|'('data')') ')'
+
+<calc_exp> ::= calc '(' <calc_s_exp> ')'
+
+<expression_list> ::=   <expression> |
+                    <expression> <expression_list> |
+                    <operator_push> |
+                    <operator_push> <expression_list>
+
+<calc_s_exp> ::=    operator_assignment |
+                    operator_define |
+                    operator_while |
+                    expression_list
+
+<identifier_list> ::=   <identifier> |
+                    <identifier> <identifier_list>
+
+<dtype> ::= <number>    |
+            <string>
+
+<operator_push> ::= '(' push <expression> ')'
+
+<operation_while> ::= while '(' <operand> <operations_compare> <operand> ')' '(' <expression_list> ')'
+
+
+<operator_assignment> ::= var <identifier> <dtype>
+
+<operator_define> ::= define <identifier> '(' <identifiers> ')' '(' <expression_list> ')'
+
+<operatations_sum> ::=    '+' |
+                        '-'
+
+<operations_compare> ::=  '>' |
+                        '<' |
+
+<operations_mul> ::=  '*' |
+                    '/' |
+
+<operand> ::=   identifier |
+                dtype
+
+<expression> ::= <summa> | <expression> <operations_compare> <summa>
+
+<summa> ::= <multiplication> { <operatations_sum> <multiplication> }
+
+<multiplication> ::= <operand> { <operations_mul> <operand> }
+
+<data> ::=  <identifier>     |
+            <comment>   |
+            <number>    |
+            <string>
+
+<letter> :: =   a |
+                b |
+                c |
+                d |
+                e |
+                f |
+                g |
+                h |
+                i |
+                j |
+                k |
+                l |
+                m |
+                n |
+                o |
+                p |
+                q |
+                r |
+                s |
+                t |
+                u |
+                v |
+                w |
+                x |
+                y |
+                z |
+                A |
+                B |
+                C |
+                D |
+                E |
+                F |
+                G |
+                H |
+                I |
+                J |
+                K |
+                L |
+                M |
+                N |
+                O |
+                P |
+                Q |
+                R |
+                S |
+                T |
+                U |
+                V |
+                W |
+                X |
+                Y |
+                Z
+
+<digit> ::= 0 |
+            1 |
+            2 |
+            3 |
+            4 |
+            5 |
+            6 |
+            7 |
+            8 |
+            9
+
+<identifier> ::= <letter> { <letter> | <digit> }
+
+<string> ::= ".*"
+
+<number> ::= {/<digit>/}
+
+<comment> ::= /\*.*\*/
