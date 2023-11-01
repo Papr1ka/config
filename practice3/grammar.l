@@ -6,6 +6,7 @@ int state;
 void UndefinedTokenPrint();
 int lexInOpen(char* filename);
 void lexInClose();
+int number;
 %}
 
 LETTER [a-zA-Z]
@@ -29,29 +30,33 @@ KEYWORD_PUSH push
 KEYWORD_WHILE while
 KEYWORD_DEFINE define
 KEYWORD_RETURN return
+KEYWORD_CALL call
+KEYWORD_OBJECT object
 
 DELIM [ \t\n]
 
 %%
 {DELIM} {;}
-{KEYWORD_WHILE} { printf("(KEYWORD_WHILE, %s)\n", yytext); return KEYWORD_WHILE; }
-{KEYWORD_RETURN} { printf("(KEYWORD_RETURN, %s)\n", yytext); return KEYWORD_RETURN; }
-{KEYWORD_DEFINE} { printf("(KEYWORD_DEFINE, %s)\n", yytext); return KEYWORD_DEFINE; }
-{KEYWORD_CALC} { printf("(KEYWORD_CALC, %s)\n", yytext); return KEYWORD_CALC; }
-{KEYWORD_LIST} { printf("(KEYWORD_LIST, %s)\n", yytext); return KEYWORD_LIST; }
-{KEYWORD_VAR} { printf("(KEYWORD_VAR, %s)\n", yytext); return KEYWORD_VAR; }
-{KEYWORD_PUSH} { printf("(KEYWORD_PUSH, %s)\n", yytext); return KEYWORD_PUSH; }
-{SEPARATOR_PLUS} { printf("(SEPARATOR_PLUS, %s)\n", yytext);return SEPARATOR_PLUS; }
-{SEPARATOR_MINUS} { printf("(SEPARATOR_MINUS, %s)\n", yytext); return SEPARATOR_MINUS; }
-{SEPARATOR_MUL} { printf("(SEPARATOR_MUL, %s)\n", yytext); return SEPARATOR_MUL; }
-{SEPARATOR_DIV} { printf("(SEPARATOR_DIV, %s)\n", yytext);return SEPARATOR_DIV; }
-{SEPARATOR_GT} { printf("(SEPARATOR_GT, %s)\n", yytext);return SEPARATOR_GT; }
-{SEPARATOR_LT} { printf("(SEPARATOR_LT, %s)\n", yytext);return SEPARATOR_LT; }
-{SEPARATOR_LB} { printf("(SEPARATOR_LB, %s)\n", yytext);return SEPARATOR_LB; }
-{SEPARATOR_RB} { printf("(SEPARATOR_RB, %s)\n", yytext);return SEPARATOR_RB; }
-{NUMBER} { printf("(NUMBER, %s)\n", yytext); sscanf(yytext, "%s", yylval.name); return (NUMBER); }
-{IDENTIFIER} { printf("(IDENTIFIER, %s)\n", yytext); sscanf(yytext, "%s", yylval.name); return (IDENTIFIER); }
-{STRING} { printf("(STRING, %s)\n", yytext);sscanf(yytext, "%s", yylval.name); return (STRING); }
+{KEYWORD_WHILE} {  printf("Lex: %s\n", yytext); return KEYWORD_WHILE; }
+{KEYWORD_OBJECT} {   printf("Lex: %s\n", yytext); return KEYWORD_OBJECT; }
+{KEYWORD_CALL} {   printf("Lex: %s\n", yytext);return KEYWORD_CALL; }
+{KEYWORD_RETURN} {   printf("Lex: %s\n", yytext);return KEYWORD_RETURN; }
+{KEYWORD_DEFINE} {   printf("Lex: %s\n", yytext);return KEYWORD_DEFINE; }
+{KEYWORD_CALC} {   printf("Lex: %s\n", yytext);return KEYWORD_CALC; }
+{KEYWORD_LIST} {   printf("Lex: %s\n", yytext);return KEYWORD_LIST; }
+{KEYWORD_VAR} {   printf("Lex: %s\n", yytext);return KEYWORD_VAR; }
+{KEYWORD_PUSH} {   printf("Lex: %s\n", yytext);return KEYWORD_PUSH; }
+{SEPARATOR_PLUS} {  printf("Lex: %s\n", yytext);return SEPARATOR_PLUS; }
+{SEPARATOR_MINUS} {   printf("Lex: %s\n", yytext);return SEPARATOR_MINUS; }
+{SEPARATOR_MUL} {   printf("Lex: %s\n", yytext);return SEPARATOR_MUL; }
+{SEPARATOR_DIV} {  printf("Lex: %s\n", yytext);return SEPARATOR_DIV; }
+{SEPARATOR_GT} {  printf("Lex: %s\n", yytext);return SEPARATOR_GT; }
+{SEPARATOR_LT} {  printf("Lex: %s\n", yytext);return SEPARATOR_LT; }
+{SEPARATOR_LB} {  printf("Lex: %s\n", yytext);return SEPARATOR_LB; }
+{SEPARATOR_RB} {  printf("Lex: %s\n", yytext);return SEPARATOR_RB; }
+{NUMBER} {   printf("Lex: %s\n", yytext);yylval.number_value = atoi(yytext); return (NUMBER); }
+{IDENTIFIER} {   printf("Lex: %s\n", yytext);strcpy(yylval.name, yytext); return (IDENTIFIER); }
+{STRING} {  printf("Lex: %s\n", yytext);strcpy(yylval.name, yytext); return (STRING); }
 {COMMENT} {;}
 %%
 
@@ -59,7 +64,7 @@ int lexInOpen(char* filename)
 {
 	if((yyin = fopen(filename, "r")) == NULL)
 	{
-		printf("\nCannot open file %s.\n", filename);
+		
 		return -1;
 	}
 	yylineno = 1;
@@ -73,5 +78,5 @@ void lexInClose()
 
 void UndefinedTokenPrint()
 {
-	printf("Error: \"Нераспознанный токен\" in line %d. Token = %s\n", yylineno, yytext);
+	
 }

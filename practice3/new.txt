@@ -1,7 +1,7 @@
 (
     (calc
         (
-            (var x 0)
+            (var x (0))
             (define increment (x)(
                 (return (x + 1))
             ))
@@ -11,10 +11,10 @@
         (list
                 (calc
                     (
-                        (var i 0)
-                        (while (i < 20)(
-                            (var x (increment(x)))
-                            (var i (increment(i)))
+                        (var i (0))
+                        (while (i < 10)(
+                            (var x (call increment(x)))
+                            (var i (call increment(i)))
                             (push ("ИКБО-" + x + "-20"))
                         ))
                     )
@@ -23,15 +23,18 @@
     )
     (students
         (list
-            (
+            (object
                 (
-                    (age 19)
-                    (group "ИКБО-4-20")
-                    (name "Иванов И.И.")
+                    age 19
+                    group "ИКБО-4-20"
+                    name "Иванов И.И."
                 )
             )
         )
     )
     (subject "Конфигурационное управление")
-    (list ())
+    (theme "The big times new roman")
+    (calc (
+        (var i (4 * 5 / 4 + 3 - 2))
+    ))
 )
