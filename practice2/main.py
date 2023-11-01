@@ -82,9 +82,9 @@ async def get_deps_async(deps_list, graph_generator):
                     deps_new.append(i)
                     handled.append(i)
             asyncio.get_running_loop().create_task(get_deps_async(deps_new, graph_generator))
-
     if len(asyncio.all_tasks()) == 1:
         asyncio.get_running_loop().stop()
+        print("Stopping loop")
 
 
 def start(lib_name):
@@ -104,7 +104,7 @@ def start(lib_name):
         loop.run_forever()
     except KeyError:
         print("Библиотека не найдена")
-
+    print("Building graph")
     g.view()
 
 
