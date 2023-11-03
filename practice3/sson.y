@@ -1,3 +1,6 @@
+%locations
+%define parse.error verbose
+
 %{
 #include <stdio.h>
 #include <locale.h>
@@ -9,11 +12,13 @@
 
 int yylex();
 
-int yyerror(char* s);
+int yyerror(const char* s);
 int lexInOpen(char* filename);
 void lexInClose();
 int tabs;
 void addTabs(char* dest, int inc);
+
+extern int yylineno;
 
 int objectId;
 int currentObjectFilled;
@@ -22,7 +27,6 @@ char objectTables[SIZE][OBJECT_MAX_KEYS][MAX_OBJECTS];
 void putKey(char* key);
 int findKey(char* key);
 void clearTable();
-
 %}
 
 %start program
@@ -155,10 +159,10 @@ int main(int argc, char **argv)
     return r;
 }
 
-int yyerror(char* s)
+int yyerror(const char* s)
 {
     printf("error\n");
-    fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "%s at line %d\n", s, yylineno);
 }
 
 int yywrap()

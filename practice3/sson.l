@@ -1,7 +1,9 @@
-%option noyywrap yylineno
+%option noyywrap
+%option yylineno
+
 %{
 #include <stdio.h>
-#include "y.tab.h"
+#include "sson.tab.h"
 int state;
 void UndefinedTokenPrint();
 int lexInOpen(char* filename);
