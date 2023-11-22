@@ -1,0 +1,12 @@
+<string>::= '"' {.} '"'
+
+<target_name>::= <string>
+
+<requirements>::= '(' { <target_name> } ')' |
+                    <target_name>
+
+<scripts>::= '[' { <string> } ']'
+
+<target>::= <target_name> ('<=' <requirements>) {/ '\n' /} <scripts>
+
+<program>::= { <target> }
