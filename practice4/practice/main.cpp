@@ -3,9 +3,9 @@
 #include "HashTable.h"
 
 int main() {
-    testBinF("input.txt");
-    testHeshT();
-    test();
-    cout << "Общее тестирование завершено" << endl;
+//    testBinF("input.txt");
+//    testHeshT();
+//    test();
+    cout << "Программа на c++ завершена." << endl;
     return 0;
 }
