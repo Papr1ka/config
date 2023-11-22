@@ -32,7 +32,12 @@ def test():
         "python -m pip install graphviz"
     ]
 
-    "venv" <= ("graphviz")
+    "sstack" <= ("create_venv")
+    [
+        "python -m pip install -i https://test.pypi.org/simple/ sstack==0.0.1"
+    ]
+
+    "venv" <= ("graphviz", "sstack")
     [
         "source venv/bin/activate"
     ]
