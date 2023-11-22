@@ -29,7 +29,7 @@ def json(**kwargs):
 
             for i in data.keys():
                 builder.create_task(Task(i, requires=data[i], commands=[
-                    f"echo {i} > {i}",
+                    f"touch {i}",
                     f"echo {i}"
                 ]))
 
