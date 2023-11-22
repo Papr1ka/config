@@ -16,8 +16,10 @@ def view(function):
         def test():
             ...
     """
-
-    manager: AutoGraph = function(view=True)
-    manager.view()
+    def wrapper(*args, **kwargs):
+        manager: AutoGraph = function(*args, **kwargs, view=True)
+        manager.view()
+        return manager
+    return wrapper
 
 
