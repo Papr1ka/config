@@ -10,7 +10,7 @@ import auto
 #auto.view
 @auto.configure(print_tasks=True)
 def config():
-    "run" <= ("main")
+    "run" <= "main"
     [
         "chmod +x ./main",
         "./main"

@@ -202,6 +202,13 @@ class Auto:
                 self.mock[task.name] = hash
         self.save()
 
+    def check(self, task) -> bool:
+        # True, если цель существует
+        r =  self.targets.get(task) is not None
+        if not r:
+            r = path.exists(task) and path.isfile(task)
+        return r
+
 
 class AutoGraph(Auto):
     def __init__(self, *args, **kwargs):
