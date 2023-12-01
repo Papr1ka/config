@@ -1,11 +1,13 @@
 <string>::= '"' {.} '"'
 
-<target_name>::= <string>
+<string_array>::= {/ <string> /}
+
+<target_name>::= <string_array>
 
 <requirements>::= '(' { <target_name> } ')' |
                     <target_name>
 
-<scripts>::= '[' { <string> } ']'
+<scripts>::= '[' { <string_array> } ']'
 
 <target>::= <target_name> ('<=' <requirements>) {/ '\n' /} <scripts>
 
