@@ -146,6 +146,8 @@ class AutoVisitor(BaseVisitor):
                 if not isinstance(node.comparators[0], ast.Tuple) and not isinstance(node.comparators[0], ast.Constant):
                     raise SyntaxError("Ожидалась строка или кортеж", get_error_details(self.src, node.comparators[0]))
                 requirements = self.visit(node.comparators[0])
+                if isinstance(requirements, str):
+                    requirements = [requirements]
                 self.checks.append(partial(checkFunction, self.src, node.comparators[0], self.builder))
             elif isinstance(node, ast.Constant):
                 name = self.visit(node)
