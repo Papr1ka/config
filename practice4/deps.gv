@@ -1,0 +1,18 @@
+digraph "Зависимости" {
+	ranksep=3
+	test
+	test -> test2
+	test2
+	test2 -> test3
+	test3
+	test3 -> test
+	sw
+	create_venv
+	graphviz
+	graphviz -> create_venv
+	sstack
+	sstack -> create_venv
+	venv
+	venv -> graphviz
+	venv -> sstack
+}

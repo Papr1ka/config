@@ -5,6 +5,7 @@ from typing import List
 
 from auto.auto import Auto as Manager, Task, AutoGraph as ViewManager
 
+
 def get_error_details(src, node, filename=''):
     """
     Подсвечивает синтаксичексую ошибку
@@ -144,6 +145,7 @@ def configure(**kwargs):
 
     *python source.py run*
     """
+
     def wrapper(func):
         def inner(view=False) -> Manager:
             if view is True:
@@ -156,6 +158,9 @@ def configure(**kwargs):
 
             body = tree.body[0].body
 
+            a = AutoVisitor(src, builder)
+            a.visit(tree.body[0])
+
             i = iter(body)
             if len(body) % 2 == 1:
                 raise SyntaxError("После цели ожидался скрипт", get_error_details(src, tree.body[0].body[-1]))
@@ -165,6 +170,86 @@ def configure(**kwargs):
                 cls.create_target([node, node2])
 
             return builder
+
         return inner
 
     return wrapper
+
+
+class BaseVisitor:
+    state: int
+    src: str
+    builder: Manager
+
+    def __init__(self, src, builder):
+        self.state = 0
+        self.src = src
+        self.builder = builder
+
+    def visit(self, tree):
+        method = 'visit_' + type(tree).__name__
+        q = getattr(self, method)
+        try:
+            return getattr(self, method)(tree)
+        except Exception as E:
+            raise SyntaxError("Синтаксическая ошибка", self.src, get_error_details(self.src, tree))
+
+class AutoVisitor(BaseVisitor):
+    def visit_FunctionDef(self, tree):
+        name = ""
+        requirements = []
+        scripts = []
+
+
+        for i in tree.body:
+            if self.state == 0:
+                name, scripts = self.visit(i)
+            else:
+                scripts = self.visit(i)
+            if self.state == 0:
+                task = Task(name, requirements, scripts)
+                self.builder.create_task(task)
+        if self.state == 1:
+            raise SyntaxError("После цели ожидался скрипт", get_error_details(self.src, tree.body[-1]))
+
+
+
+    def visit_Expr(self, tree):
+        node = tree.value
+        if self.state == 0:
+            self.state = 1
+            if isinstance(node, ast.Compare):
+                name = self.visit(node.left)
+                if (len(node.ops) > 1):
+                    raise SyntaxError("Ожидался '<='", get_error_details(self.src, node.ops[1]))
+                requirements = self.visit(node.comparators[0])
+            elif isinstance(node, ast.Constant):
+                name = self.visit(node)
+                requirements = []
+            else:
+                raise SyntaxError("Цель должна быть либо строкой, либо строкой с зависимостями")
+            return name, requirements
+        else:
+            self.state = 0
+            return self.visit(node)
+
+
+
+    def visit_Constant(self, tree):
+        if isinstance(tree.value, str):
+            return tree.value
+        raise SyntaxError("Ожидалась строка", get_error_details(self.src, tree.body[0].body[-1]))
+
+    def visit_Tuple(self, tree):
+        scripts = []
+        for i in tree.elts:
+            scripts.append(self.visit(i))
+        return scripts
+
+    def visit_List(self, tree):
+        scripts = []
+        if not isinstance(tree, ast.List):
+            raise SyntaxError("Скрипты должны быть массивом", get_error_details(self.src, tree))
+        for i in tree.elts:
+            scripts.append(self.visit(i))
+        return scripts

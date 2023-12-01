@@ -3,7 +3,7 @@ import auto
 
 # noinspection PyStatementEffect
 @auto.cli
-# @auto.view
+@auto.view
 @auto.configure(print_tasks=False, mock_name="demo.json")
 def test():
     "test" <= ("test2")
