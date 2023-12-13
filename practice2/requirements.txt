@@ -13,3 +13,5 @@ multidict==6.0.4
 pycares==4.4.0
 pycparser==2.21
 yarl==1.9.2
+progress==1.6
+

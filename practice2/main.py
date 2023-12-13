@@ -5,11 +5,14 @@ import re
 from typing import List, Tuple, Union
 from time import time
 
+from progress.spinner import Spinner
+
 dependencies_url_pattern = "https://pypi.python.org/pypi/{}/json"  # Адрес для получения информации о пакете
 
 handled = []  # Список пакетов, для которых уже были получены зависимости (для избежания зацикливания)
 ONLY_PACKAGE_NAME_PATTERN = r"[\w\._-]+"  # Регулярное выражение для поиска имени пакета (используется 1-е совпадение)
 
+message = "Поиск зависимостей для {:<30} {} с "
 
 def filter_package_name(dirty_dependencies: List[str]):
     """
@@ -81,10 +84,16 @@ async def get_deps_async(deps_list, graph_generator):
                 if i not in handled:
                     deps_new.append(i)
                     handled.append(i)
+
+            if deps_new:
+                s.message = message.format(deps_new[-1], round(time() - begin, 2))
+                s.next()
+            # Можно замедлить программу в 3-5 раз, если добавить к.с. await в след. строке
             asyncio.get_running_loop().create_task(get_deps_async(deps_new, graph_generator))
     if len(asyncio.all_tasks()) == 1:
         asyncio.get_running_loop().stop()
-        print("Stopping loop")
+        s.message = "Stopping loop"
+        s.next()
 
 
 def start(lib_name):
@@ -104,12 +113,17 @@ def start(lib_name):
         loop.run_forever()
     except KeyError:
         print("Библиотека не найдена")
-    print("Building graph")
+    s.message = "Вывод графа "
+    s.next()
     g.view()
 
 
 if __name__ == "__main__":
-    LIB_NAME = "pdf"  # Название пакета
+    print("Введите название пакета:")
+    LIB_NAME = input()  # Название пакета
+    s = Spinner(message.format(LIB_NAME, 0))
     begin = time()
     start(LIB_NAME)
-    print(f"Готово за {time() - begin} ms")
+    s.message = f"Готово за {time() - begin} ms "
+    s.next()
+    print()
