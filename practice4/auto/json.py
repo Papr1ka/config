@@ -16,6 +16,15 @@ def json(**kwargs):
         def config():
             with open("source.json") as file:
                 return json.loads(file.read())
+    
+    Необходима, чтобы обёрнутая функция возвращала словарь.
+
+    Так как у задач нету команд, они будут добавлены.
+
+    Для всех задач команды следующие:
+
+    touch имя_задачи
+    echo имя_задачи
     """
 
     def wrapper(func):

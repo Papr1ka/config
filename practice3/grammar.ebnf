@@ -1,4 +1,11 @@
-
+# Грамматика уровня лексем представлена
+# в виде регулярных выражений в рамках этого блока комментариев, просим прощения
+# LETTER [a-zA-Z]
+# DIGIT [0-9]
+# IDENTIFIER {LETTER}({LETTER}|{DIGIT})*
+# STRING \"([^\"]*)?\"
+# NUMBER {DIGIT}+
+# COMMENT \/\*.*\*\/
 
 <value>::=  IDENTIFIER |
             NUMBER |
